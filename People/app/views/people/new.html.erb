@@ -1,0 +1,29 @@
+<% # page to save a new person %>
+<div class="panel panel-default row">
+	<div class="panel-heading">New</div>
+	<div class="panel-body">
+		<%= form_for :person, url: people_path, class: "form-horizontal" do |f| %>
+			<div class="form-group">
+				<%= f.label :name %>
+				<%= f.text_field :name, class: "form-control", placeholder: "Enter the name" %>
+			</div>
+			<div class="form-group">
+				<%= f.label :age %>
+				<%= f.text_field :age, class: "form-control", placeholder: "Enter the age", maxlength: 50 %>
+			</div>
+			<%= f.submit "Save", :class => "btn btn-primary" %>
+			<%= link_to "Back", people_path, :class => "btn btn-default" %>
+
+			<% if @person and @person.errors.any? %>
+				<div class="alert alert-danger" style="margin-top:10px;">
+					The person wasn't saved, fix the errors bellow:
+					<ul>
+					<% @person.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+					<% end %>
+					</ul>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+</div>

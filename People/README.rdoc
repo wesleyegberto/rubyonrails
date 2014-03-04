@@ -1,0 +1,6 @@
+== README
+@author Wesley Egberto de Brito
+@date 03/03/2014
+
+Simple application CRUD to test Ruby on Rails.
+The app manages the people.

@@ -1,0 +1,41 @@
+class PeopleController < ApplicationController
+  before_action :getPerson, only: [:show, :edit]
+
+  # action to index, list all people
+  def index
+  	@people = Person.all
+  end
+
+  def new
+  end
+
+  def getPerson
+    @person = Person.find(params[:id])
+  end
+
+  #action to show a specific person
+  def show
+  	if !@person
+  		flash[:message] = "Person not found"
+  	end
+  	render action: "edit"
+  end
+
+  def edit
+  end
+
+  #action to save the person
+  def create
+  	#@person = Person.new(params[:person]) #create a new person
+  	@person = Person.new(post_params) #create a new person using security post
+  	@person.save #save the person in database, but the rails' feature strong_parameteres doesn't allow to save without specify the fields those are accepted
+  	redirect_to @person
+  end
+
+  private
+  	def post_params
+  		#method params returns an ActiveSupport::HashWithIndifferentAccess
+  		params.require(:person).permit(:name, :age)
+  	end
+
+end

@@ -1,0 +1,26 @@
+<div class="row panel panel-default">
+<div class="panel-heading">People registered</div>
+<div class="panel-body">
+	<table class="table table-striped">
+		<thead><th>ID</th><th>Name</th><th>Age</th><th>Actions</th></thead>
+		<tbody>
+			<% @people.each do |p| %>
+				<tr>
+					<td><%= p.id %></td><td><%= p.name %></td><td><%= p.age %></td>
+					<td>
+						<%= link_to "Edit", edit_person_path(p.id), :class => "btn btn-success" %>
+						<%= link_to "Delete", person_path(p), method: :delete, :class => "btn btn-danger", data: { confirm: 'Are you sure?' } %>
+					</td>
+				</tr>
+			<% end %>
+			<% if @people.size == 0 %>
+				<tr><td colspan="4"><em>people not found</em></td></tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<div class="panel-footer">
+	<%= link_to "New", new_person_path, :class => "btn btn-default" %>
+	<%= link_to "Home", "/", :class => "btn btn-default" %>
+</div>
+</div>
